@@ -27,7 +27,7 @@ public class AppController {
     @GetMapping("/info")
     public ResponseEntity<Map<String, String>> getAppInfo(){
 
-        System.out.println("getting App Info " + Thread.currentThread().getName());
+        System.out.println("getting App Info " + Thread.currentThread().getName() + " " + System.currentTimeMillis());
         var appInfo = Map
                 .of(
                         "name", this.appName,
