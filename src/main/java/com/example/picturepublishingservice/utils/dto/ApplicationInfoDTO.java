@@ -1,4 +1,4 @@
-package com.example.picturepublishingservice.model.dto;
+package com.example.picturepublishingservice.utils.dto;
 
 public class ApplicationInfoDTO {
 

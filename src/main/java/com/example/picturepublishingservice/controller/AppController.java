@@ -1,7 +1,7 @@
 package com.example.picturepublishingservice.controller;
 
 
-import com.example.picturepublishingservice.model.dto.ApplicationInfoDTO;
+import com.example.picturepublishingservice.utils.dto.ApplicationInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
