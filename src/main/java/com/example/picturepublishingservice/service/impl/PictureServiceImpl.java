@@ -1,5 +1,6 @@
 package com.example.picturepublishingservice.service.impl;
 
+import com.example.picturepublishingservice.model.Picture;
 import com.example.picturepublishingservice.repository.PictureRepository;
 import com.example.picturepublishingservice.service.PictureService;
 import com.example.picturepublishingservice.utils.FileUploadUtils;
@@ -8,6 +9,7 @@ import com.example.picturepublishingservice.utils.dto.PictureInfoDTO;
 import com.example.picturepublishingservice.utils.dto.PictureInfoResponse;
 import com.example.picturepublishingservice.utils.mappers.PictureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,12 +38,25 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public PictureInfoResponse list(OffsetLimitDTO offsetLimitDTO) {
-        var pictureInfoResponse = new PictureInfoResponse();
+
         int pageSize = offsetLimitDTO.offset / offsetLimitDTO.limit;
         var page = pictureRepository.list(PageRequest.of(pageSize, offsetLimitDTO.limit));
+        return getPictureInfoResponse(page);
+    }
+
+    @Override
+    public PictureInfoResponse listNewPhotos(OffsetLimitDTO offsetLimitDTO){
+
+        int pageSize = offsetLimitDTO.offset / offsetLimitDTO.limit;
+        var page = pictureRepository.listNewPhotos(PageRequest.of(pageSize, offsetLimitDTO.limit));
+        return getPictureInfoResponse(page);
+
+    }
+
+    private PictureInfoResponse getPictureInfoResponse(Page<Picture> page) {
+        var pictureInfoResponse = new PictureInfoResponse();
         pictureInfoResponse.setTotalCount(page.getTotalElements());
         pictureInfoResponse.setData(page.stream().map(PictureMapper::toDTO).collect(Collectors.toList()));
-
         return pictureInfoResponse;
     }
 }

@@ -19,4 +19,11 @@ public interface PictureRepository extends JpaRepository<Picture, Long> {
             countQuery = "SELECT count(*) FROM picture p where p.is_accepted = true",
             nativeQuery = true)
     Page<Picture> list(Pageable pageable);
+
+
+    @Query(
+            value = "select * from picture p where p.is_accepted IS NULL",
+            countQuery = "SELECT count(*) FROM picture p where p.is_accepted IS NULL",
+            nativeQuery = true)
+    Page<Picture> listNewPhotos(Pageable pageable);
 }

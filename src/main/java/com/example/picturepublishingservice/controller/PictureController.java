@@ -66,4 +66,20 @@ public class PictureController {
 
     }
 
+    @GetMapping(value = "/unprocessing", produces = "application/json", consumes = "application/json")
+    @Operation(
+            summary = "Get all Photos Info that not processed",
+            description = "getting all new photos info and display them for admin to accept or reject them",
+            tags = "photo-files")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = PictureInfoResponse.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", description = "Un Authorized", content = @Content()),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content ={@Content()})})
+
+    public ResponseEntity<PictureInfoResponse> listNewPhotos(@Valid  @RequestBody OffsetLimitDTO offsetLimitDTO){
+
+        return ResponseEntity.status(HttpStatus.OK).body(pictureService.listNewPhotos(offsetLimitDTO));
+
+    }
+
 }

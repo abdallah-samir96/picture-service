@@ -12,4 +12,5 @@ import java.util.List;
 public interface PictureService {
      void upload(MultipartFile multipartFile, PictureInfoDTO pictureInfoDTO);
      PictureInfoResponse list(OffsetLimitDTO offsetLimitDTO);
+     PictureInfoResponse listNewPhotos(OffsetLimitDTO offsetLimitDTO);
 }
